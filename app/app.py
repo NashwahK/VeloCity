@@ -1,13 +1,14 @@
 import streamlit as st
-import folium
-from streamlit_folium import st_folium  # Import st_folium for embedding Folium maps in Streamlit
+from views import congestion_monitoring
 
-st.title("Traffic Congestion Monitoring")
-st.write("This is a test of your Streamlit setup with Folium integration.")
+st.set_page_config(page_title="VeloCity - Traffic Monitoring", layout="wide")
+st.sidebar.title("Navigation")
 
-# Create a Folium map
-m = folium.Map(location=[40.7128, -74.0060], zoom_start=12)
-folium.Marker([40.7128, -74.0060], tooltip="New York").add_to(m)
+page = st.sidebar.radio("Go to", ["Traffic Congestion Heatmap", "Data Visualization", "Traffic Signal Management"])
 
-# Display the Folium map in Streamlit
-st_folium(m, width=700, height=500)
+if page == "Traffic Congestion Heatmap":
+    congestion_monitoring.show_page() 
+elif page == "Data Visualization":
+    st.title("Module 1")  
+elif page == "Traffic Signal Management":
+    st.title("Module 4")
